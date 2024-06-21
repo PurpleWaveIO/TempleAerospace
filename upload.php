@@ -75,7 +75,7 @@
 <input type="text" id="name" name="name" required>
 </div>
 <div class="form-group">
-<label for="file">Choose File (Max 30MB):</label>
+<label for="file">Choose File:</label>
 <input type="file" id="file" name="file" required>
 </div>
 <input type="submit" value="Submit">
@@ -85,5 +85,24 @@
 </div>
 </div>
  
+<?php
+error_reporting(0);
+$target_dir = "uploads/"; // Directory where the file will be placed
+$target_file = $target_dir . basename($_FILES["file"]["name"]);
+$uploadOk = 1;
+
+// Move the uploaded file to the specified directory
+if (isset($_FILES["file"])) {
+    if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+        echo "The file " . basename($_FILES["file"]["name"]) . " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
+} else {
+    echo "No file was uploaded.";
+}
+
+?>
+
 </body>
 </html>
